@@ -19,6 +19,7 @@ export const Contact = () => {
   const [form, setForm] = useState({
     firstname: "",
     email: "",
+    phone: "",
     company: "",
     message: "",
     dinero_presupuestado: "",
@@ -39,6 +40,7 @@ export const Contact = () => {
           fields: [
             { name: "firstname", value: form.firstname },
             { name: "email", value: form.email },
+            { name: "phone", value: form.phone },
             { name: "company", value: form.company },
             { name: "message", value: form.message },
             { name: "dinero_presupuestado", value: form.dinero_presupuestado },
@@ -51,7 +53,7 @@ export const Contact = () => {
       });
       if (!res.ok) throw new Error(String(res.status));
       setStatus("ok");
-      setForm({ firstname: "", email: "", company: "", message: "", dinero_presupuestado: "" });
+      setForm({ firstname: "", email: "", phone: "", company: "", message: "", dinero_presupuestado: "" });
     } catch {
       setStatus("error");
     }
@@ -147,8 +149,22 @@ export const Contact = () => {
             </div>
 
             <div className="mt-8 space-y-2">
+              <label htmlFor="c-phone" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
+                03 / Telefono
+              </label>
+              <input
+                id="c-phone"
+                type="tel"
+                value={form.phone}
+                onChange={set("phone")}
+                placeholder="+57 300 000 0000"
+                className={fieldClass}
+              />
+            </div>
+
+            <div className="mt-8 space-y-2">
               <label htmlFor="c-company" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
-                03 / Nombre de la empresa
+                04 / Nombre de la empresa
               </label>
               <input
                 id="c-company"
@@ -162,7 +178,7 @@ export const Contact = () => {
 
             <div className="mt-8 space-y-2">
               <label htmlFor="c-message" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
-                04 / Mensaje
+                05 / Mensaje
               </label>
               <textarea
                 id="c-message"
@@ -177,7 +193,7 @@ export const Contact = () => {
 
             <div className="mt-8 space-y-2">
               <label htmlFor="c-budget" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
-                05 / Presupuesto (COP)
+                06 / Presupuesto (COP)
               </label>
               <input
                 id="c-budget"
