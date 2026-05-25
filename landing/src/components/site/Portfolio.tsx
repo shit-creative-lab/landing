@@ -6,6 +6,8 @@ import drinko from "@/assets/case-drinko.jpg";
 import noz from "@/assets/case-noz.jpg";
 import kzo from "@/assets/case-kzo.jpg";
 
+type GalleryItem = { type: "image"; src: string } | { type: "video"; url: string };
+
 type Case = {
   n: string;
   name: string;
@@ -15,9 +17,8 @@ type Case = {
   chaos: string;
   move: string;
   impact: string;
-  gallery: string[];
+  gallery: GalleryItem[];
 };
-
 const cases: Case[] = [
   {
     n: "01",
@@ -241,18 +242,27 @@ export const Portfolio = () => {
                     Galería
                   </div>
                   <div className="grid grid-cols-3 gap-px border border-border bg-border">
-                    {active.gallery.map((src, i) => (
-                      <div key={i} className="aspect-[4/5] overflow-hidden bg-background grain-overlay">
-                        <img
-                          src={src}
-                          alt={`${active.name} — imagen ${i + 1}`}
-                          loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
+  {active.gallery.map((item, i) => (
+    <div key={i} className="aspect-[4/5] overflow-hidden bg-background">
+      {item.type === "video" ? (
+        <iframe
+          src={item.url}
+          className="h-full w-full"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowFullScreen
+          title={`${active.name} — video ${i + 1}`}
+        />
+      ) : (
+        <img
+          src={item.src}
+          alt={`${active.name} — imagen ${i + 1}`}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+        />
+      )}
+    </div>
+  ))}
+</div>
 
                 <a
                   href="#contacto"
