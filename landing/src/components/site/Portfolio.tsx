@@ -32,7 +32,7 @@ const cases: Case[] = [
     impact: "Posicionamiento como referente de pensamiento inmobiliario en LATAM.",
     gallery: [
       { type: "image", src: startup },
-      { type: "video", url: "https://www.youtube.com/embed/ID_STARTUP_AQUI" },
+      { type: "video", url: "https://www.youtube.com/embed/fkCs_U2Okaw" },
       { type: "image", src: noz },
     ],
   },
@@ -77,7 +77,7 @@ const cases: Case[] = [
     impact: "Posicionamiento como nodo central de la escena urbana en Medellin.",
     gallery: [
       { type: "image", src: kzo },
-      { type: "video", url: "https://www.youtube.com/embed/ID_KZO_AQUI" },
+      { type: "video", url: "https://www.youtube.com/embed/lXAGxIcbEIQ" },
       { type: "image", src: drinko },
     ],
   },
