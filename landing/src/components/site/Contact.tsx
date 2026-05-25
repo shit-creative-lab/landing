@@ -87,28 +87,28 @@ export const Contact = () => {
           <Reveal delay={0.1}>
             <dl className="mt-11 border-t border-border">
               {contactRows.map((r) => (
-                <div
-                  key={r.k}
-                  className="flex items-center justify-between border-b border-border py-3.5 font-mono text-xs uppercase tracking-[0.16em]"
-                >
-                  <dt className="text-foreground/60">{r.k}</dt>
-                  <dd className={r.accent ? "text-brand-flame" : ""}>
-                    {r.href ? (
-  
-    href={r.href}
-    target={r.href.startsWith("http") ? "_blank" : undefined}
-    rel="noopener noreferrer"
-    className="link-underline pb-0.5"
+                 <div
+    key={r.k}
+    className="flex items-center justify-between border-b border-border py-3.5 font-mono text-xs uppercase tracking-[0.16em]"
   >
-    {r.v}
-  </a>
-) : (
-  r.v
-)}
-                  </dd>
-                </div>
-              ))}
-            </dl>
+    <dt className="text-foreground/60">{r.k}</dt>
+    <dd className={r.accent ? "text-brand-flame" : ""}>
+      {r.href ? (
+        
+          href={r.href}
+          target={r.href.startsWith("http") ? "_blank" : undefined}
+          rel="noopener noreferrer"
+          className="link-underline pb-0.5"
+        >
+          {r.v}
+             <a>
+      ) : (
+        r.v
+      )}
+    </dd>
+  </div>
+))}
+</dl>
           </Reveal>
         </div>
 
