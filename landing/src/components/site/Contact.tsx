@@ -94,17 +94,17 @@ export const Contact = () => {
                   <dt className="text-foreground/60">{r.k}</dt>
                   <dd className={r.accent ? "text-brand-flame" : ""}>
                     {r.href ? (
-                      
-                        href={r.href}
-                        target={r.href.startsWith("http") ? "_blank" : undefined}
-                        rel="noopener noreferrer"
-                        className="link-underline pb-0.5"
-                      >
-                        {r.v}
-                      </a>
-                    ) : (
-                      r.v
-                    )}
+  
+    href={r.href}
+    target={r.href.startsWith("http") ? "_blank" : undefined}
+    rel="noopener noreferrer"
+    className="link-underline pb-0.5"
+  >
+    {r.v}
+  </a>
+) : (
+  r.v
+)}
                   </dd>
                 </div>
               ))}
