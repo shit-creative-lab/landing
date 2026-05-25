@@ -6,8 +6,8 @@ import { Reveal } from "./motion";
    En HubSpot: Marketing -> Formularios -> tu formulario -> "Compartir".
    Mientras esten vacios, el formulario muestra un aviso y NO envia.
    ==================================================================== */
-const HUBSPOT_PORTAL_ID = ""; // ej. "12345678"
-const HUBSPOT_FORM_GUID = ""; // ej. "a1b2c3d4-0000-0000-0000-000000000000"
+const HUBSPOT_PORTAL_ID = "50477825"; // ej. "12345678"
+const HUBSPOT_FORM_GUID = "bc8b79c6-1299-4237-8822-92f53b44bd08"; // ej. "a1b2c3d4-0000-0000-0000-000000000000"
 
 const HUBSPOT_CONFIGURED = Boolean(HUBSPOT_PORTAL_ID && HUBSPOT_FORM_GUID);
 const HUBSPOT_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`;
