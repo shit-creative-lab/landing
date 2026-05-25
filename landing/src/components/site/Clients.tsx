@@ -76,7 +76,7 @@ export const Clients = () => {
         {/* fade edges */}
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent" />
-        <div className="flex marquee-track">
+        <div className="flex" style={{ animation: "marquee 20s linear infinite" }}>
           {[0, 1].map((dup) => (
             <div key={dup} className="flex shrink-0" aria-hidden={dup === 1}>
               {clients.map((c) => (
