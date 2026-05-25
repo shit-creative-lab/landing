@@ -1,0 +1,184 @@
+import { useState } from "react";
+import { Reveal } from "./motion";
+
+/* ====================================================================
+   HUBSPOT — PEGA AQUI TUS DOS VALORES (son publicos, no son secretos).
+   En HubSpot: Marketing -> Formularios -> tu formulario -> "Compartir".
+   Mientras esten vacios, el formulario muestra un aviso y NO envia.
+   ==================================================================== */
+const HUBSPOT_PORTAL_ID = ""; // ej. "12345678"
+const HUBSPOT_FORM_GUID = ""; // ej. "a1b2c3d4-0000-0000-0000-000000000000"
+
+const HUBSPOT_CONFIGURED = Boolean(HUBSPOT_PORTAL_ID && HUBSPOT_FORM_GUID);
+const HUBSPOT_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`;
+
+type Status = "idle" | "sending" | "ok" | "error";
+
+const contactRows = [
+  { k: "Email", v: "team@shitcreativelab.com", href: "mailto:team@shitcreativelab.com" },
+  { k: "WhatsApp", v: "+57 324 278 8459", href: "https://wa.me/573242788459" },
+  { k: "Instagram", v: "@shit.lab", href: "https://www.instagram.com/shit.lab/", accent: true },
+  { k: "Hubs", v: "MDE / BOG / MIA" },
+];
+
+export const Contact = () => {
+  const [status, setStatus] = useState<Status>("idle");
+  const [form, setForm] = useState({ name: "", brand: "", problem: "", budget: "" });
+
+  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!HUBSPOT_CONFIGURED) {
+      setStatus("error");
+      return;
+    }
+    setStatus("sending");
+    try {
+      const res = await fetch(HUBSPOT_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          fields: [
+            { name: "firstname", value: form.name },
+            { name: "company", value: form.brand },
+            { name: "message", value: form.problem },
+            { name: "budget", value: form.budget },
+          ],
+          context: {
+            pageName: "SHIT Lab - Landing",
+            pageUri: typeof window !== "undefined" ? window.location.href : "",
+          },
+        }),
+      });
+      if (!res.ok) throw new Error(String(res.status));
+      setStatus("ok");
+      setForm({ name: "", brand: "", problem: "", budget: "" });
+    } catch {
+      setStatus("error");
+    }
+  };
+
+  const fieldClass =
+    "w-full border-b border-border bg-transparent py-3 text-lg outline-none transition-colors placeholder:text-foreground/35 focus:border-brand-flame";
+
+  return (
+    <section
+      id="contacto"
+      aria-label="Contacto"
+      className="relative border-t border-border py-24 md:py-32"
+    >
+      <div className="container grid gap-12 md:grid-cols-12">
+        <div className="md:col-span-5">
+          <Reveal>
+            <div className="mb-4 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.3em] text-foreground/65">
+              <span className="h-px w-10 bg-brand-flame" />
+              Contact
+            </div>
+            <h2 className="font-display text-[clamp(2.8rem,7vw,6rem)] leading-[0.95]">
+              Buscas impacto
+              <br />
+              o mas <span className="text-brand-flame">bullsh*t?</span>
+            </h2>
+            <p className="mt-6 max-w-sm text-pretty text-foreground/80">
+              Cuentanos el bloqueo real. No los sintomas, no la version
+              "presentable". El que tu solo sabes.
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <dl className="mt-11 border-t border-border">
+              {contactRows.map((r) => (
+                <div
+                  key={r.k}
+                  className="flex items-center justify-between border-b border-border py-3.5 font-mono text-xs uppercase tracking-[0.16em]"
+                >
+                  <dt className="text-foreground/60">{r.k}</dt>
+                  <dd className={r.accent ? "text-brand-flame" : ""}>
+                    {r.href ? (
+                      <a
+                        href={r.href}
+                        target={r.href.startsWith("http") ? "_blank" : undefined}
+                        rel="noopener noreferrer"
+                        className="link-underline pb-0.5"
+                      >
+                        {r.v}
+                      </a>
+                    ) : (
+                      r.v
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
+        </div>
+
+        <Reveal delay={0.12} className="md:col-span-7">
+          <form
+            onSubmit={handleSubmit}
+            className="corner-tick relative border border-foreground bg-card p-6 shadow-brutal md:p-10"
+          >
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div className="space-y-2">
+                <label htmlFor="c-name" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
+                  01 / Nombre
+                </label>
+                <input id="c-name" required value={form.name} onChange={set("name")}
+                  placeholder="Tu nombre completo" className={fieldClass} />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="c-brand" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
+                  02 / Marca
+                </label>
+                <input id="c-brand" required value={form.brand} onChange={set("brand")}
+                  placeholder="Tu marca / proyecto" className={fieldClass} />
+              </div>
+            </div>
+
+            <div className="mt-8 space-y-2">
+              <label htmlFor="c-problem" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
+                03 / Problema real (el bloqueo)
+              </label>
+              <textarea id="c-problem" required rows={4} value={form.problem} onChange={set("problem")}
+                placeholder="No suavices. El verdadero. El que ni le cuentas a tu socio."
+                className={`${fieldClass} resize-none text-base`} />
+            </div>
+
+            <div className="mt-8 space-y-2">
+              <label htmlFor="c-budget" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
+                04 / Presupuesto
+              </label>
+              <input id="c-budget" value={form.budget} onChange={set("budget")}
+                placeholder="Ej. COP 1.000.000 - COP 5.000.000" className={fieldClass} />
+            </div>
+
+            {status === "ok" && (
+              <p className="mt-6 border border-brand-green bg-brand-green/10 px-4 py-3 font-mono text-xs uppercase tracking-[0.14em] text-brand-green">
+                Mensaje recibido. Te contactamos en menos de 24h.
+              </p>
+            )}
+            {status === "error" && (
+              <p className="mt-6 border border-brand-flame bg-brand-flame/10 px-4 py-3 font-mono text-xs uppercase tracking-[0.14em] text-brand-flame">
+                {HUBSPOT_CONFIGURED
+                  ? "No se pudo enviar. Escribenos a team@shitcreativelab.com"
+                  : "Formulario sin conectar - falta configurar HubSpot (ver Contact.tsx)."}
+              </p>
+            )}
+
+            <button type="submit" disabled={status === "sending"}
+              className="group mt-10 flex w-full items-center justify-between border border-foreground bg-foreground px-6 py-5 text-background transition-all hover:bg-brand-flame hover:border-brand-flame hover:text-brand-pampas disabled:cursor-wait disabled:opacity-60">
+              <span className="font-display text-2xl md:text-[1.7rem]">
+                {status === "sending" ? "Enviando..." : "Enviar el Sh*t"}
+              </span>
+              <span className="font-mono text-xs uppercase tracking-[0.18em]">
+                Respuesta &lt; 24h
+              </span>
+            </button>
+          </form>
+        </Reveal>
+      </div>
+    </section>
+  );
+};

@@ -1,0 +1,227 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Anton&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   SHIT LAB — Editorial Brutalism Design System
+   Light theme on Pampas · Brandbook 2026 aligned
+   ------------------------------------------------------------
+   PALETA: Eerie Black #1A1A1A · Forest Night #132D15
+           Mushroom Green #456D30 · Flame Pea #DD5C35
+           Weathered Taupe #534741 · Egyptian Grey #9B907E
+           Pampas #F4F3ED (fondo)
+   TIPOGRAFIA: Inter (cuerpo) · Formula Condensed Bold->Anton (display)
+               PP Editorial New Light Italic->Newsreader (editorial)
+   ============================================================ */
+
+@layer base {
+  :root {
+    --eerie-black: 0 0% 10%;
+    --forest-night: 123 41% 13%;
+    --mushroom-green: 99 39% 31%;
+    --flame-pea: 14 71% 54%;
+    --weathered-taupe: 18 12% 31%;
+    --egyptian-grey: 36 13% 63%;
+    --pampas: 51 27% 94%;
+
+    --background: var(--pampas);
+    --foreground: var(--forest-night);
+
+    --card: 48 22% 90%;
+    --card-foreground: var(--forest-night);
+    --popover: 48 22% 90%;
+    --popover-foreground: var(--forest-night);
+
+    --primary: var(--mushroom-green);
+    --primary-foreground: var(--pampas);
+    --primary-glow: var(--flame-pea);          /* hover -> Flame Pea */
+
+    --secondary: 48 22% 90%;
+    --secondary-foreground: var(--forest-night);
+
+    --muted: 48 18% 88%;
+    --muted-foreground: var(--eerie-black);    /* #1A1A1A */
+
+    --accent: var(--flame-pea);
+    --accent-foreground: var(--pampas);
+
+    --destructive: 14 71% 54%;
+    --destructive-foreground: var(--pampas);
+
+    --border: 123 20% 18%;                     /* línea fina oscura editorial */
+    --border-soft: 36 12% 78%;
+    --input: 123 20% 18%;
+    --ring: var(--flame-pea);
+
+    --radius: 0px;
+
+    --shadow-brutal: 6px 6px 0 0 hsl(var(--foreground));
+    --shadow-brutal-lg: 10px 10px 0 0 hsl(var(--foreground));
+    --shadow-brutal-accent: 6px 6px 0 0 hsl(var(--flame-pea));
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: "ss01", "cv01";
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: hsl(var(--flame-pea));
+    color: hsl(var(--pampas));
+  }
+
+  /* Scrollbar editorial */
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: hsl(var(--card)); }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--forest-night));
+    border: 2px solid hsl(var(--card));
+  }
+  ::-webkit-scrollbar-thumb:hover { background: hsl(var(--flame-pea)); }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--flame-pea));
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* ---- Tipografía ---- */
+  .font-display {
+    font-family: 'Formula Condensed', 'Anton', 'Bebas Neue', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    line-height: 0.92;
+    text-transform: uppercase;
+  }
+  .font-editorial {
+    font-family: 'PP Editorial New', 'Newsreader', Georgia, serif;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .font-body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+  .font-mono-tech {
+    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---- Brutalist effects ---- */
+  .shadow-brutal { box-shadow: var(--shadow-brutal); }
+  .shadow-brutal-lg { box-shadow: var(--shadow-brutal-lg); }
+  .shadow-brutal-accent { box-shadow: var(--shadow-brutal-accent); }
+
+  .text-stroke {
+    -webkit-text-stroke: 1.5px hsl(var(--forest-night));
+    color: transparent;
+  }
+  .text-stroke-accent {
+    -webkit-text-stroke: 1.5px hsl(var(--flame-pea));
+    color: transparent;
+  }
+
+  /* Grain overlay para fondo claro */
+  .grain-overlay { position: relative; }
+  .grain-overlay::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.045;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Marquee */
+  .marquee-track {
+    animation: marquee 32s linear infinite;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+
+  /* Ticker divider con guiones */
+  .ticker-divider {
+    background-image: repeating-linear-gradient(
+      90deg,
+      hsl(var(--forest-night)) 0 14px,
+      transparent 14px 30px
+    );
+  }
+
+  /* Hover de tarjeta (labs) -> Flame Pea */
+  .hover-flame {
+    transition: background-color 0.35s cubic-bezier(0.65,0,0.35,1),
+                color 0.35s cubic-bezier(0.65,0,0.35,1);
+  }
+  .hover-flame:hover {
+    background-color: hsl(var(--flame-pea));
+    color: hsl(var(--pampas));
+  }
+
+  /* Underline link editorial */
+  .link-underline {
+    background-image: linear-gradient(hsl(var(--flame-pea)), hsl(var(--flame-pea)));
+    background-size: 0% 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.4s cubic-bezier(0.65,0,0.35,1);
+  }
+  .link-underline:hover { background-size: 100% 2px; }
+
+  /* Corner ticks decorativos */
+  .corner-tick::before,
+  .corner-tick::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: hsl(var(--flame-pea));
+    border-style: solid;
+    border-width: 0;
+  }
+  .corner-tick::before {
+    top: -1px; left: -1px;
+    border-top-width: 2px; border-left-width: 2px;
+  }
+  .corner-tick::after {
+    bottom: -1px; right: -1px;
+    border-bottom-width: 2px; border-right-width: 2px;
+  }
+
+  .text-balance { text-wrap: balance; }
+  .text-pretty { text-wrap: pretty; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+.animate-blink { animation: blink 1.1s steps(2) infinite; }
+
+/* Respeta usuarios con reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
