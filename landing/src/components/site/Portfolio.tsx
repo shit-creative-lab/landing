@@ -66,7 +66,9 @@ const cases: Case[] = [
   { type: "image", src: drinko },
   { type: "video", url: "https://www.youtube.com/embed/s8nDjcmFjBU" },
   { type: "image", src: kzo },
-];}
+],
+  },
+];
 
 export const Portfolio = () => {
   const [active, setActive] = useState<Case | null>(null);
