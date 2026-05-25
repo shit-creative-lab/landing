@@ -1,15 +1,8 @@
 import { useState } from "react";
 import { Reveal } from "./motion";
 
-/* ====================================================================
-   HUBSPOT — PEGA AQUI TUS DOS VALORES (son publicos, no son secretos).
-   En HubSpot: Marketing -> Formularios -> tu formulario -> "Compartir".
-   Mientras esten vacios, el formulario muestra un aviso y NO envia.
-   ==================================================================== */
-const HUBSPOT_PORTAL_ID = "50477825"; // ej. "12345678"
-const HUBSPOT_FORM_GUID = "bc8b79c6-1299-4237-8822-92f53b44bd08"; // ej. "a1b2c3d4-0000-0000-0000-000000000000"
-
-const HUBSPOT_CONFIGURED = Boolean(HUBSPOT_PORTAL_ID && HUBSPOT_FORM_GUID);
+const HUBSPOT_PORTAL_ID = "50477825";
+const HUBSPOT_FORM_GUID = "bc8b79c6-1299-4237-8822-92f53b44bd08";
 const HUBSPOT_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_GUID}`;
 
 type Status = "idle" | "sending" | "ok" | "error";
@@ -23,17 +16,20 @@ const contactRows = [
 
 export const Contact = () => {
   const [status, setStatus] = useState<Status>("idle");
-  const [form, setForm] = useState({ name: "", brand: "", problem: "", budget: "" });
+  const [form, setForm] = useState({
+    firstname: "",
+    email: "",
+    company: "",
+    message: "",
+    dinero_presupuestado: "",
+  });
 
-  const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    setForm((f) => ({ ...f, [k]: e.target.value }));
+  const set = (k: keyof typeof form) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+      setForm((f) => ({ ...f, [k]: e.target.value }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!HUBSPOT_CONFIGURED) {
-      setStatus("error");
-      return;
-    }
     setStatus("sending");
     try {
       const res = await fetch(HUBSPOT_ENDPOINT, {
@@ -41,10 +37,11 @@ export const Contact = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           fields: [
-            { name: "firstname", value: form.name },
-            { name: "company", value: form.brand },
-            { name: "message", value: form.problem },
-            { name: "budget", value: form.budget },
+            { name: "firstname", value: form.firstname },
+            { name: "email", value: form.email },
+            { name: "company", value: form.company },
+            { name: "message", value: form.message },
+            { name: "dinero_presupuestado", value: form.dinero_presupuestado },
           ],
           context: {
             pageName: "SHIT Lab - Landing",
@@ -54,7 +51,7 @@ export const Contact = () => {
       });
       if (!res.ok) throw new Error(String(res.status));
       setStatus("ok");
-      setForm({ name: "", brand: "", problem: "", budget: "" });
+      setForm({ firstname: "", email: "", company: "", message: "", dinero_presupuestado: "" });
     } catch {
       setStatus("error");
     }
@@ -97,7 +94,7 @@ export const Contact = () => {
                   <dt className="text-foreground/60">{r.k}</dt>
                   <dd className={r.accent ? "text-brand-flame" : ""}>
                     {r.href ? (
-                      <a
+                      
                         href={r.href}
                         target={r.href.startsWith("http") ? "_blank" : undefined}
                         rel="noopener noreferrer"
@@ -122,36 +119,76 @@ export const Contact = () => {
           >
             <div className="grid gap-6 sm:grid-cols-2">
               <div className="space-y-2">
-                <label htmlFor="c-name" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
+                <label htmlFor="c-firstname" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
                   01 / Nombre
                 </label>
-                <input id="c-name" required value={form.name} onChange={set("name")}
-                  placeholder="Tu nombre completo" className={fieldClass} />
+                <input
+                  id="c-firstname"
+                  required
+                  value={form.firstname}
+                  onChange={set("firstname")}
+                  placeholder="Tu nombre completo"
+                  className={fieldClass}
+                />
               </div>
               <div className="space-y-2">
-                <label htmlFor="c-brand" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
-                  02 / Marca
+                <label htmlFor="c-email" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
+                  02 / Correo
                 </label>
-                <input id="c-brand" required value={form.brand} onChange={set("brand")}
-                  placeholder="Tu marca / proyecto" className={fieldClass} />
+                <input
+                  id="c-email"
+                  type="email"
+                  required
+                  value={form.email}
+                  onChange={set("email")}
+                  placeholder="tu@correo.com"
+                  className={fieldClass}
+                />
               </div>
             </div>
 
             <div className="mt-8 space-y-2">
-              <label htmlFor="c-problem" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
-                03 / Problema real (el bloqueo)
+              <label htmlFor="c-company" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
+                03 / Nombre de la empresa
               </label>
-              <textarea id="c-problem" required rows={4} value={form.problem} onChange={set("problem")}
-                placeholder="No suavices. El verdadero. El que ni le cuentas a tu socio."
-                className={`${fieldClass} resize-none text-base`} />
+              <input
+                id="c-company"
+                required
+                value={form.company}
+                onChange={set("company")}
+                placeholder="Tu marca / empresa"
+                className={fieldClass}
+              />
+            </div>
+
+            <div className="mt-8 space-y-2">
+              <label htmlFor="c-message" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
+                04 / Mensaje
+              </label>
+              <textarea
+                id="c-message"
+                required
+                rows={4}
+                value={form.message}
+                onChange={set("message")}
+                placeholder="No suavices. El bloqueo real. El que ni le cuentas a tu socio."
+                className={`${fieldClass} resize-none text-base`}
+              />
             </div>
 
             <div className="mt-8 space-y-2">
               <label htmlFor="c-budget" className="font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/60">
-                04 / Presupuesto
+                05 / Presupuesto (COP)
               </label>
-              <input id="c-budget" value={form.budget} onChange={set("budget")}
-                placeholder="Ej. COP 1.000.000 - COP 5.000.000" className={fieldClass} />
+              <input
+                id="c-budget"
+                type="number"
+                min="0"
+                value={form.dinero_presupuestado}
+                onChange={set("dinero_presupuestado")}
+                placeholder="Ej. 5000000"
+                className={fieldClass}
+              />
             </div>
 
             {status === "ok" && (
@@ -161,14 +198,15 @@ export const Contact = () => {
             )}
             {status === "error" && (
               <p className="mt-6 border border-brand-flame bg-brand-flame/10 px-4 py-3 font-mono text-xs uppercase tracking-[0.14em] text-brand-flame">
-                {HUBSPOT_CONFIGURED
-                  ? "No se pudo enviar. Escribenos a team@shitcreativelab.com"
-                  : "Formulario sin conectar - falta configurar HubSpot (ver Contact.tsx)."}
+                No se pudo enviar. Escribenos a team@shitcreativelab.com
               </p>
             )}
 
-            <button type="submit" disabled={status === "sending"}
-              className="group mt-10 flex w-full items-center justify-between border border-foreground bg-foreground px-6 py-5 text-background transition-all hover:bg-brand-flame hover:border-brand-flame hover:text-brand-pampas disabled:cursor-wait disabled:opacity-60">
+            <button
+              type="submit"
+              disabled={status === "sending"}
+              className="group mt-10 flex w-full items-center justify-between border border-foreground bg-foreground px-6 py-5 text-background transition-all hover:bg-brand-flame hover:border-brand-flame hover:text-brand-pampas disabled:cursor-wait disabled:opacity-60"
+            >
               <span className="font-display text-2xl md:text-[1.7rem]">
                 {status === "sending" ? "Enviando..." : "Enviar el Sh*t"}
               </span>

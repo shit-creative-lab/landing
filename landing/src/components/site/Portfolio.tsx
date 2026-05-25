@@ -215,9 +215,9 @@ export const Portfolio = () => {
               <div className="p-6 md:p-10">
                 <dl className="space-y-6 border-t border-border pt-7">
                   {[
-                    { k: "El Caos", v: active.chaos },
-                    { k: "La Intervención", v: active.move },
-                    { k: "El Impacto", v: active.impact, accent: true },
+                    { k: "El Problema", v: active.chaos },
+                    { k: "Intervención", v: active.move },
+                    { k: "Holy Sh*t", v: active.impact, accent: true },
                   ].map((row) => (
                     <div key={row.k} className="grid grid-cols-12 gap-3 md:gap-5">
                       <dt className="col-span-12 pt-1 font-mono text-[10px] uppercase tracking-[0.24em] text-brand-flame md:col-span-3">
