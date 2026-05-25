@@ -125,14 +125,14 @@
   .shadow-brutal-lg { box-shadow: var(--shadow-brutal-lg); }
   .shadow-brutal-accent { box-shadow: var(--shadow-brutal-accent); }
 
-  .text-stroke {
-    -webkit-text-stroke: 1.5px hsl(var(--forest-night));
-    color: transparent;
-  }
-  .text-stroke-accent {
-    -webkit-text-stroke: 1.5px hsl(var(--flame-pea));
-    color: transparent;
-  }
+ .text-stroke {
+  -webkit-text-stroke: 1.5px hsl(var(--forest-night));
+  color: hsl(var(--pampas));
+}
+.text-stroke-accent {
+  -webkit-text-stroke: 1.5px hsl(var(--flame-pea));
+  color: hsl(var(--pampas));
+}
 
   /* Grain overlay para fondo claro */
   .grain-overlay { position: relative; }
@@ -148,7 +148,7 @@
 
   /* Marquee */
   .marquee-track {
-    animation: marquee 32s linear infinite;
+    animation: marquee 22s linear infinite;
   }
   .marquee-track:hover { animation-play-state: paused; }
 
