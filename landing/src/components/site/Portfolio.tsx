@@ -62,9 +62,11 @@ const cases: Case[] = [
     chaos: "Falta de espacios y lugares para la escena músical emergente. Había una idea de unir a las personas pero faltaba un plan de marketing claro, falta de dirección artística y un objetivo en común.",
     move: "Diseño y ejecución de evento masivo de networking + narrativa de marca para artistas.",
     impact: "Posicionamiento como nodo central de la escena urbana en Medellín.",
-    gallery: [kzo, drinko, noz],
-  },
-];
+   gallery: [
+  { type: "image", src: drinko },
+  { type: "video", url: "https://www.youtube.com/embed/s8nDjcmFjBU" },
+  { type: "image", src: kzo },
+],
 
 export const Portfolio = () => {
   const [active, setActive] = useState<Case | null>(null);
