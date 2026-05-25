@@ -73,19 +73,18 @@ export const Clients = () => {
 
       {/* Edge-to-edge marquee */}
       <div className="relative overflow-hidden border-y border-border">
-        {/* fade edges */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent" />
-        <div className="flex" style={{ animation: "marquee 8s linear infinite" }}>
-          {[0, 1].map((dup) => (
-            <div key={dup} className="flex shrink-0" aria-hidden={dup === 1}>
-              {clients.map((c) => (
-                <LogoItem key={`${dup}-${c.name}`} name={c.name} logo={c.logo} />
-              ))}
-            </div>
-          ))}
-        </div>
+  <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent" />
+  <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent" />
+  <div className="flex w-max" style={{ animation: "marquee 8s linear infinite" }}>
+    {[0, 1, 2, 3].map((dup) => (
+      <div key={dup} className="flex shrink-0" aria-hidden={dup > 0}>
+        {clients.map((c) => (
+          <LogoItem key={`${dup}-${c.name}`} name={c.name} logo={c.logo} />
+        ))}
       </div>
+    ))}
+  </div>
+</div>
 
       <div className="container">
         <p className="mt-7 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/55">
