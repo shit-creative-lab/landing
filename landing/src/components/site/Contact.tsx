@@ -54,6 +54,7 @@ export const Contact = () => {
       if (!res.ok) throw new Error(String(res.status));
       setStatus("ok");
       setForm({ firstname: "", email: "", phone: "", company: "", message: "", dinero_presupuestado: "" });
+      window.open("https://wa.me/573242788459", "_blank");
     } catch {
       setStatus("error");
     }
