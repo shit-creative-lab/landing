@@ -79,36 +79,35 @@ export const Contact = () => {
               o mas <span className="text-brand-flame">bullsh*t?</span>
             </h2>
             <p className="mt-6 max-w-sm text-pretty text-foreground/80">
-              Cuentanos el bloqueo real. No los sintomas, no la version
-              "presentable". El que tu solo sabes.
+              Cuentanos el bloqueo real. No los sintomas, no la version presentable. El que tu solo sabes.
             </p>
           </Reveal>
 
           <Reveal delay={0.1}>
             <dl className="mt-11 border-t border-border">
               {contactRows.map((r) => (
-                 <div
-    key={r.k}
-    className="flex items-center justify-between border-b border-border py-3.5 font-mono text-xs uppercase tracking-[0.16em]"
-  >
-    <dt className="text-foreground/60">{r.k}</dt>
-    <dd className={r.accent ? "text-brand-flame" : ""}>
-      {r.href ? (
-        
-          href={r.href}
-          target={r.href.startsWith("http") ? "_blank" : undefined}
-          rel="noopener noreferrer"
-          className="link-underline pb-0.5"
-        >
-          {r.v}
-             <a>
-      ) : (
-        r.v
-      )}
-    </dd>
-  </div>
-))}
-</dl>
+                <div
+                  key={r.k}
+                  className="flex items-center justify-between border-b border-border py-3.5 font-mono text-xs uppercase tracking-[0.16em]"
+                >
+                  <dt className="text-foreground/60">{r.k}</dt>
+                  <dd className={r.accent ? "text-brand-flame" : ""}>
+                    {r.href ? (
+                      <a
+                        href={r.href}
+                        target={r.href.startsWith("http") ? "_blank" : undefined}
+                        rel="noopener noreferrer"
+                        className="link-underline pb-0.5"
+                      >
+                        {r.v}
+                      </a>
+                    ) : (
+                      r.v
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </Reveal>
         </div>
 
