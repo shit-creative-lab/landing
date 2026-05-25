@@ -74,14 +74,14 @@ export const Hero = () => {
         </motion.div>
 
         <h1 className="font-display text-[clamp(3.2rem,11.5vw,11.5rem)] text-balance">
-          <MaskLine delay={0.05}>Stop planning.</MaskLine>
-          <MaskLine delay={0.13}>
-            <span className="text-stroke-accent">Start doing</span>
-          </MaskLine>
-          <MaskLine delay={0.21}>
-            some good <span className="text-brand-flame">Sh*t.</span>
-          </MaskLine>
-        </h1>
+  <span className="block">Stop planning.</span>
+  <span className="block">
+    <span className="text-stroke-accent">Start doing</span>
+  </span>
+  <span className="block">
+    some good <span className="text-brand-flame">Sh*t.</span>
+  </span>
+</h1>
 
         <motion.p
           initial={{ opacity: 0, y: 16 }}

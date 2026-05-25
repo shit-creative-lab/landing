@@ -35,12 +35,12 @@ export const Manifesto = () => {
 
         <blockquote className="max-w-6xl">
           <p className="font-display text-[clamp(2.4rem,7vw,7rem)] text-balance">
-            <MaskLine>En SHIT Lab declaramos</MaskLine>
-            <MaskLine delay={0.08}>
-              la <span className="text-brand-flame">guerra</span> al{" "}
-              <span className="font-editorial lowercase text-stroke">status quo</span>.
-            </MaskLine>
-          </p>
+  <span className="block">En SHIT Lab declaramos</span>
+  <span className="block">
+    la <span className="text-brand-flame">guerra</span> al{" "}
+    <span className="font-editorial lowercase text-stroke">status quo</span>.
+  </span>
+</p>
 
           <Reveal delay={0.15}>
             <p className="mt-12 max-w-5xl font-display text-[clamp(1.8rem,4.5vw,4.5rem)] leading-[1.02]">
