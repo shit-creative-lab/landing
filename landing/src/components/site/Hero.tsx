@@ -1,7 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { MaskLine } from "./motion";
-import heroImg from "@/assets/hero-flash.jpg";
+
 import heroVideo from "@/assets/hero-video.mp4";
 
 const ticker = [
@@ -26,19 +25,19 @@ export const Hero = () => {
     >
       {/* Parallax editorial image */}
       <div className="pointer-events-none absolute inset-0">
-  <motion.div
-    style={{ y: imgY, scale: imgScale }}
-    className="absolute right-0 top-0 h-[112%] w-full md:w-[52%]"
-  >
-    <video
-      autoPlay
-      muted
-      loop
-      playsInline
-      className="h-full w-full object-cover"
-    >
-      <source src={heroVideo} type="video/mp4" />
-    </video>
+        <motion.div
+          style={{ y: imgY, scale: imgScale }}
+          className="absolute right-0 top-0 h-[112%] w-full md:w-[52%]"
+        >
+          <video
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="h-full w-full object-cover"
+          >
+            <source src={heroVideo} type="video/mp4" />
+          </video>
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/55 md:via-background/35 md:to-transparent" />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-background/30 to-background/55 md:via-transparent" />
         </motion.div>
@@ -78,14 +77,14 @@ export const Hero = () => {
         </motion.div>
 
         <h1 className="font-display text-[clamp(3.2rem,11.5vw,11.5rem)] text-balance">
-  <span className="block">Stop planning.</span>
-  <span className="block">
-    <span className="text-stroke-accent">Start doing</span>
-  </span>
-  <span className="block">
-    some good <span className="text-brand-flame">Sh*t.</span>
-  </span>
-</h1>
+          <span className="block">Stop planning.</span>
+          <span className="block">
+            <span className="text-stroke-accent">Start doing</span>
+          </span>
+          <span className="block">
+            some good <span className="text-brand-flame">Sh*t.</span>
+          </span>
+        </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 16 }}
