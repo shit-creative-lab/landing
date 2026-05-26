@@ -42,7 +42,7 @@ const cases: Case[] = [
     impact: "Sitio web reconstruido, 13 proveedores coordinados bajo una sola dirección estratégica y un evento con 100% de calidad en convocatoria que posicionó a Startup como ente de autoridad en arquitectura y desarrollo inmobiliario en Medellín.",
     gallery: [
       { type: "image", src: startup2 },
-      { type: "video", url: "https://www.youtube.com/embed/fkCs_U2Okaw" },
+      { type: "iframe", url: "https://www.youtube.com/embed/fkCs_U2Okaw" },
       { type: "image", src: startup },
     ],
   },
@@ -87,7 +87,7 @@ const cases: Case[] = [
     impact: "+300 asistentes en el pico de la jornada, +15 artistas convocados y +7K impresiones orgánicas. La escena musical emergente de Medellín consolidada en un espacio de networking real.",
     gallery: [
       { type: "video", url: kzo1 },
-      { type: "video", url: "https://www.youtube.com/embed/lXAGxIcbEIQ" },
+      { type: "iframe", url: "https://www.youtube.com/embed/lXAGxIcbEIQ" },
       { type: "video", url: kzo2 },
     ],
   },
@@ -155,7 +155,7 @@ export const Portfolio = () => {
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/15 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-forest via-brand-forest/15 to-transparent" />
                 <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
                   <span className="border border-foreground bg-background/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.2em] backdrop-blur-sm">
                     Case #{c.n}
@@ -165,17 +165,17 @@ export const Portfolio = () => {
                   {c.tag}
                 </div>
                 <div className="absolute inset-x-0 bottom-0 z-10 p-6 md:p-8">
-                  <h3 className="font-display text-[clamp(2.4rem,4.5vw,4rem)] leading-[0.95]">
-                    {c.name}
-                  </h3>
-                  <p className="mt-2 max-w-[34ch] font-editorial text-lg text-brand-flame md:text-xl">
-                    {c.shortImpact}
-                  </p>
-                  <span className="mt-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.28em] text-foreground/80">
-                    Ver caso
-                    <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
-                  </span>
-                </div>
+  <h3 className="font-display text-[clamp(2.4rem,4.5vw,4rem)] leading-[0.95] text-white">
+    {c.name}
+  </h3>
+  <p className="mt-2 max-w-[34ch] font-editorial text-lg text-brand-flame md:text-xl">
+    {c.shortImpact}
+  </p>
+  <span className="mt-4 inline-flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.28em] text-white/80">
+    Ver caso
+    <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+  </span>
+</div>
               </button>
             </Reveal>
           );
@@ -217,7 +217,7 @@ export const Portfolio = () => {
                   alt={active.name}
                   className="absolute inset-0 h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-forest via-brand-forest/20 to-transparent" />
                 <div className="absolute left-5 top-5 border border-foreground bg-background/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.2em]">
                   Case #{active.n}
                 </div>
