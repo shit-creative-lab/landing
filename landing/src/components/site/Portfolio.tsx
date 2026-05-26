@@ -217,12 +217,11 @@ export const Portfolio = () => {
                   alt={active.name}
                   className="absolute inset-0 h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-forest via-brand-forest/20 to-transparent" />
                 <div className="absolute left-5 top-5 border border-foreground bg-background/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.2em]">
                   Case #{active.n}
                 </div>
                 <div className="absolute inset-x-0 bottom-0 p-6 md:p-9">
-                  <h3 className="font-display text-[clamp(2.8rem,6vw,5rem)] leading-[0.92]">
+                  <h3 className="font-display text-[clamp(2.4rem,4.5vw,4rem)] leading-[0.95] text-white">
                     {active.name}
                   </h3>
                   <p className="mt-2 font-editorial text-xl text-brand-flame md:text-2xl">
