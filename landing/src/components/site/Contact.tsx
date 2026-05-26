@@ -41,6 +41,9 @@ export const Contact = () => {
             { name: "firstname", value: form.firstname },
             { name: "email", value: form.email },
             { name: "phone", value: form.phone },
+            { name: "mobilephone", value: form.phone },
+            { name: "phonenumber", value: form.phone },
+            { name: "telefono", value: form.phone },
             { name: "company", value: form.company },
             { name: "message", value: form.message },
             { name: "dinero_presupuestado", value: form.dinero_presupuestado },
@@ -82,7 +85,7 @@ export const Contact = () => {
               o mas <span className="text-brand-flame">bullsh*t?</span>
             </h2>
             <p className="mt-6 max-w-sm text-pretty text-foreground/80">
-              Cuentanos el bloqueo real. No los sintomas, no la version presentable. El que tu solo sabes.
+              Cuentanos el bloqueo real. No los sintomas, no la version presentable. El que tú solo sabes.
             </p>
           </Reveal>
 
