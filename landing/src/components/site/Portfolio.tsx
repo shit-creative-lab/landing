@@ -37,7 +37,7 @@ const cases: Case[] = [
     img: startup,
     tag: "Real Estate · Branding · Web",
     shortImpact: "Desarrollo Inmobiliario a Hub de Pensamiento y Cultura",
-    chaos: "Comunicar la filosofía de un marca que va en contra de lo tradicional. Startup no es una desarrolladora inmobiliaria convencional; es una empresa que piensa en la creatividad y el impacto para hacer país y ciudad. Los conceptos tradicionales no permiten que la industria inmobiliaria "viva y conozca" la visión Startup desde su lente disruptivo y no convencional.",
+    chaos: "Comunicar la filosofía de un marca que va en contra de lo tradicional. Startup no es una desarrolladora inmobiliaria convencional; es una empresa que piensa en la creatividad y el impacto para hacer país y ciudad. Los conceptos tradicionales no permiten que la industria inmobiliaria 'viva y conozca' la visión Startup desde su lente disruptivo y no convencional.",
     move: "Reconstruimos su presencia desde el ADN: nuevo sitio web, sistema de contenido editorial. Además Dirección del Startup PowerHouse 1 — un evento que reunió a los arquitectos seniors y rookies más relevantes de Medellín bajo el concepto Startup.Este incluyó piezas de convocatoria con estética limpia, integración de arte y música como lenguaje de marca, charlas y cata de café.",
     impact: "Sitio web reconstruido, 13 proveedores coordinados bajo una sola dirección estratégica y un evento con 100% de calidad en convocatoria que posicionó a Startup como ente de autoridad en arquitectura y desarrollo inmobiliario en Medellín.",
     gallery: [
