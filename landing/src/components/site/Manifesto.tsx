@@ -45,7 +45,7 @@ export const Manifesto = () => {
           <Reveal delay={0.15}>
             <p className="mt-12 max-w-5xl font-display text-[clamp(1.8rem,4.5vw,4.5rem)] leading-[1.02]">
               La creatividad sin estrategia es{" "}
-              <span className="font-editorial lowercase text-foreground/55">arte</span>.
+              <span className="font-editorial lowercase text-stroke/55">arte</span>.
               <br />
               La creatividad <span className="text-brand-flame">con</span> estrategia es{" "}
               <span className="text-brand-flame">poder</span>.

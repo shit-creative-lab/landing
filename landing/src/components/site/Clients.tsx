@@ -54,7 +54,7 @@ export const Clients = () => {
   // Animacion con requestAnimationFrame: independiente del ancho de pantalla.
   // Recalcula el ancho real de UNA copia y reinicia sin saltos visibles.
   useEffect(() => {
-    const SPEED = 60; // pixeles por segundo — sube para mas rapido
+    const SPEED = 70; // pixeles por segundo — sube para mas rapido
     let raf = 0;
     let last = performance.now();
     let pos = 0;
@@ -130,7 +130,7 @@ export const Clients = () => {
 
       <div className="container">
         <p className="mt-7 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/55">
-          [ Seleccion · 2024—2026 ]
+          [ Selección · 2024—2026 ]
         </p>
       </div>
     </section>
