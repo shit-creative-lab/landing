@@ -207,7 +207,12 @@
 
 @keyframes marquee {
   from { transform: translateX(0); }
-  to { transform: translateX(-25%); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes scroll-logos {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-16.666%); }
 }
 
 @keyframes blink {
