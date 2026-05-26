@@ -10,6 +10,9 @@ import startup2 from "@/assets/startup-2.jpg";
 import noz from "@/assets/noiz-1.jpg";
 import noz2 from "@/assets/noiz-2.jpg";
 import noz3 from "@/assets/noiz-3.jpg";
+import kzo from "@/assets/kzo-3.jpg";
+import kzo1 from "@/assets/kzo-1.mp4";
+import kzo2 from "@/assets/kzo-2.mp4";
 type GalleryItem = 
   | { type: "image"; src: string }
   | { type: "video"; url: string }
@@ -33,10 +36,10 @@ const cases: Case[] = [
     name: "STARTUP",
     img: startup,
     tag: "Real Estate · Branding · Web",
-    shortImpact: "Referente de pensamiento inmobiliario en LATAM.",
-    chaos: "Hub inmobiliario con autoridad tecnica pero estetica de PDF de 2014.",
-    move: "Reconstruccion total: identidad, voz y plataforma editorial pensada como medio, no como portafolio.",
-    impact: "Posicionamiento como referente de pensamiento inmobiliario en LATAM.",
+    shortImpact: "Desarrollo Inmobiliario a Hub de Pensamiento y Cultura",
+    chaos: "Comunicar la filosofía de un marca que va en contra de lo tradicional. Startup no es una desarrolladora inmobiliaria convencional; es una empresa que piensa en la creatividad y el impacto para hacer país y ciudad. Los conceptos tradicionales no permiten que la industria inmobiliaria "viva y conozca" la visión Startup desde su lente disruptivo y no convencional.",
+    move: "Reconstruimos su presencia desde el ADN: nuevo sitio web, sistema de contenido editorial. Además Dirección del Startup PowerHouse 1 — un evento que reunió a los arquitectos seniors y rookies más relevantes de Medellín bajo el concepto Startup.Este incluyó piezas de convocatoria con estética limpia, integración de arte y música como lenguaje de marca, charlas y cata de café.",
+    impact: "Sitio web reconstruido, 13 proveedores coordinados bajo una sola dirección estratégica y un evento con 100% de calidad en convocatoria que posicionó a Startup como ente de autoridad en arquitectura y desarrollo inmobiliario en Medellín.",
     gallery: [
       { type: "image", src: startup2 },
       { type: "video", url: "https://www.youtube.com/embed/fkCs_U2Okaw" },
@@ -47,11 +50,11 @@ const cases: Case[] = [
   n: "02",
   name: "DRINKO",
   img: drinko,
-  tag: "Beverage · Stream Fighters 4",
-  shortImpact: "+4M de espectadores. Cero pesos en pauta.",
-  chaos: "Marca emergente con cero awareness frente a gigantes con presupuesto de pauta.",
-  move: "Hype engineering quirurgico dentro del ecosistema Stream Fighters: storyline, drops y momentos virales.",
-  impact: "+4M de espectadores. Cero pesos en pauta paga.",
+  tag: "Branding · Beverage · Stream Fighters 4",
+  shortImpact: "De marca emergente a protagonista en Stream Fighters 4",
+  chaos: "Hacer que una marca emergente de la que el streamer Westcol hace parte, aprovechara dicha platafarma y el evento de streaming más grande de LATAM para su posicionamiento. Pero antes, había una necesidad de aterrizar y creae una narrativa de impacto inmediato y luego crear logística para ejecutar activaciones en un entorno de alta velocidad y presión.",
+  move: "Creamos todo el universo visual de DRINKO para Stream Fighters 4: publicidad de gran formato, presencia en la lona del ring, un carrito temático de distribución estratégica y un equipo in-situ coordinando contenido en tiempo real. Gestionamos la interacción directa con Xokas, Andrea Valdiri y Ovy on the Drums para que el producto llegara a cámara de forma orgánica.",
+  impact: "Aprovechar plataforma de +4M de espectadores en streaming, +200K reproducciones orgánicas en redes y +15K contactos presenciales en el recinto. Cero pesos en pauta paga.",
   gallery: [
     { type: "video", url: ad1Drinko },
     { type: "image", src: drinko2 },
@@ -62,11 +65,11 @@ const cases: Case[] = [
   n: "03",
   name: "NO//Z",
   img: noz,
-  tag: "Nightlife · Brand System",
-  shortImpact: "De club a referente cultural premium.",
-  chaos: "Marca arrastrando estigma nocturno y percepcion de bajo perfil cultural.",
-  move: "Reposicionamiento como ecosistema premium: identidad, ritual de marca y curaduria de experiencias.",
-  impact: "De club a referente cultural premium con waiting list propia.",
+  tag: "Nightlife · Brand System · Architecture · Interior Design",
+  shortImpact: "De 'chiquifiesta' a referente de entretenimientoen Medellín.",
+  chaos: "La Romana tenía público pero el estigma la tenía atrapada. Era percibida como lugar de rumba de bajo perfil — y eso limitaba el tipo de personas, marcas y experiencias que podía atraer. No había concepto, no había identidad, no había ecosistema. Solo una fiesta sin alma.",
+  move: "Creamos NO//Z desde cero: nombre, marca completa, identidad visual, concepto de vida nocturna elevado y diferenciado. Supervisamos el diseño conceptual e interiorismo para que el espacio hablara el mismo idioma que la marca. Desarrollamos la landing page, la estrategia visual y la curva de expectativa para el lanzamiento oficial.",
+  impact: "Transformación total de identidad — local remodelado, marca nueva y concepto premium ejecutado. 1.5 años de gestión exitosa manteniendo relevancia y expectativa. El espacio que nadie tomaba en serio se convirtió en el proyecto más esperado de la rumba MDE.",
   gallery: [
     { type: "image", src: noz },
     { type: "image", src: noz2 },
@@ -77,11 +80,11 @@ const cases: Case[] = [
     n: "04",
     name: "KZO BEAT",
     img: kzo,
-    tag: "Musica Urbana · Networking",
-    shortImpact: "Nodo central de la escena urbana en Medellin.",
-    chaos: "Talento sin red. Escena urbana fragmentada y sin posicionamiento estrategico.",
-    move: "Diseno y ejecucion de eventos masivos de networking + narrativa de marca para artistas.",
-    impact: "Posicionamiento como nodo central de la escena urbana en Medellin.",
+    tag: "Musica Urbana · Networking · Eventos",
+    shortImpact: "De parche entre amigos a epicentro de networking de la escena musical de Medellín.",
+    chaos: "abía ganas, había talento y había una idea. Pero no había plan, no había dirección artística y no había un objetivo claro. La escena musical emergente de Medellín estaba fragmentada — los artistas existían en silos sin un espacio real para conectar.",
+    move: "Convertimos la idea en un evento profesional: dirección de videos promocionales, animación visual premium para convocar figuras clave de la industria, diseño de merch y señalética oficial, y gestión de marcas e influencers con cero presupuesto de pauta. Acompañamos cada paso para ejecutar un evento de más de 200 personas con la estética y el orden de una producción de alto nivel.",
+    impact: "+300 asistentes en el pico de la jornada, +15 artistas convocados y +7K impresiones orgánicas. La escena musical emergente de Medellín consolidada en un espacio de networking real.",
     gallery: [
       { type: "video", url: kzo1 },
       { type: "video", url: "https://www.youtube.com/embed/lXAGxIcbEIQ" },
