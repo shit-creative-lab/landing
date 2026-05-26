@@ -212,7 +212,7 @@
 
 @keyframes scroll-logos {
   0% { transform: translateX(0); }
-  100% { transform: translateX(-16.666%); }
+  100% { transform: translateX(calc(-100% / 6)); }
 }
 
 @keyframes blink {
