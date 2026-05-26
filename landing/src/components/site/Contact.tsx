@@ -85,7 +85,7 @@ export const Contact = () => {
               o mas <span className="text-brand-flame">bullsh*t?</span>
             </h2>
             <p className="mt-6 max-w-sm text-pretty text-foreground/80">
-              Cuentanos el bloqueo real. No los sintomas, no la version presentable. El que tú solo sabes.
+              Cuentanos el bloqueo real. No los sintomas, no la version presentable. El que tu solo sabes.
             </p>
           </Reveal>
 
@@ -220,6 +220,28 @@ export const Contact = () => {
                 No se pudo enviar. Escribenos a team@shitcreativelab.com
               </p>
             )}
+
+            <div className="mt-8 flex items-start gap-3">
+              <input
+                id="c-terms"
+                type="checkbox"
+                required
+                className="mt-1 h-4 w-4 shrink-0 cursor-pointer"
+                style={{ accentColor: "hsl(14 71% 54%)" }}
+              />
+              <label htmlFor="c-terms" className="font-mono text-[11px] uppercase tracking-[0.16em] text-foreground/70 leading-relaxed">
+                He leido y acepto la{" "}
+                <a
+                  href="/politica-de-datos"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-flame link-underline pb-0.5"
+                >
+                  Politica de Tratamiento de Datos Personales
+                </a>
+                . Autorizo el uso de mis datos conforme a la Ley 1581 de 2012.
+              </label>
+            </div>
 
             <button
               type="submit"
