@@ -66,7 +66,7 @@ export const Clients = () => {
             </h2>
           </div>
           <p className="max-w-xs font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-foreground/65">
-            16 marcas — de nightlife a real estate — reconstruidas sin rodeos.
+            16 marcas — Desde bebibas hasta real estate — No existe SHIT que no se pueda transformar.
           </p>
         </Reveal>
       </div>

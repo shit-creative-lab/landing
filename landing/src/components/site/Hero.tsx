@@ -92,9 +92,9 @@ export const Hero = () => {
           transition={{ duration: 0.7, delay: 0.4 }}
           className="mt-9 max-w-xl text-lg md:text-xl leading-relaxed text-foreground/85 text-pretty"
         >
-          Transformamos visiones ambiciosas y bloqueos empresariales en{" "}
+          Transformamos las visiones más ambiciosas y los bloqueos empresariales en{" "}
           <span className="font-editorial text-foreground">
-            marcas memorables y negocios con autoridad.
+            marcas memorables y negocios relevantes.
           </span>
         </motion.p>
 
