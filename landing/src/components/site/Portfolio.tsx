@@ -52,7 +52,7 @@ const cases: Case[] = [
   img: drinko,
   tag: "Branding · Beverage · Stream Fighters 4",
   shortImpact: "De marca emergente a protagonista en Stream Fighters 4",
-  chaos: "Hacer que una marca emergente de la que el streamer Westcol hace parte, aprovechara dicha platafarma y el evento de streaming más grande de LATAM para su posicionamiento. Pero antes, había una necesidad de aterrizar y creae una narrativa de impacto inmediato y luego crear logística para ejecutar activaciones en un entorno de alta velocidad y presión.",
+  chaos: "Hacer que una marca emergente de la que el streamer Westcol hace parte, aprovechara dicha platafarma y el evento de streaming más grande de LATAM para su posicionamiento. Pero antes, había una necesidad de aterrizar y crear una narrativa de impacto inmediato y luego crear logística para ejecutar activaciones en un entorno de alta velocidad y presión.",
   move: "Creamos todo el universo visual de DRINKO para Stream Fighters 4: publicidad de gran formato, presencia en la lona del ring, un carrito temático de distribución estratégica y un equipo in-situ coordinando contenido en tiempo real. Gestionamos la interacción directa con Xokas, Andrea Valdiri y Ovy on the Drums para que el producto llegara a cámara de forma orgánica.",
   impact: "Aprovechar plataforma de +4M de espectadores en streaming, +200K reproducciones orgánicas en redes y +15K contactos presenciales en el recinto. Cero pesos en pauta paga.",
   gallery: [
@@ -82,7 +82,7 @@ const cases: Case[] = [
     img: kzo,
     tag: "Musica Urbana · Networking · Eventos",
     shortImpact: "De parche entre amigos a epicentro de networking de la escena musical de Medellín.",
-    chaos: "abía ganas, había talento y había una idea. Pero no había plan, no había dirección artística y no había un objetivo claro. La escena musical emergente de Medellín estaba fragmentada — los artistas existían en silos sin un espacio real para conectar.",
+    chaos: "Había ganas, había talento y había una idea. Pero no había plan, no había dirección artística y no había un objetivo claro. La escena musical emergente de Medellín estaba fragmentada — los artistas existían en silos sin un espacio real para conectar.",
     move: "Convertimos la idea en un evento profesional: dirección de videos promocionales, animación visual premium para convocar figuras clave de la industria, diseño de merch y señalética oficial, y gestión de marcas e influencers con cero presupuesto de pauta. Acompañamos cada paso para ejecutar un evento de más de 200 personas con la estética y el orden de una producción de alto nivel.",
     impact: "+300 asistentes en el pico de la jornada, +15 artistas convocados y +7K impresiones orgánicas. La escena musical emergente de Medellín consolidada en un espacio de networking real.",
     gallery: [
