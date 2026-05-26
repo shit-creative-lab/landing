@@ -81,7 +81,7 @@ export const Clients = () => {
     flexWrap: "nowrap",
     width: "max-content",
     minWidth: "100%",
-    animation: "scroll-logos 12s linear infinite",
+    animation: "scroll-logos 18s linear infinite",
     willChange: "transform",
   }}
 >
