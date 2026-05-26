@@ -1,3 +1,4 @@
+import { useRef, useEffect, useState } from "react";
 import { Reveal } from "./motion";
 import malartista from "@/assets/logos/malartista.svg";
 import arthelier from "@/assets/logos/arthelier.svg";
@@ -47,6 +48,37 @@ const LogoItem = ({ name, logo }: { name: string; logo: string }) => (
 );
 
 export const Clients = () => {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [offset, setOffset] = useState(0);
+
+  // Animacion con requestAnimationFrame: independiente del ancho de pantalla.
+  // Recalcula el ancho real de UNA copia y reinicia sin saltos visibles.
+  useEffect(() => {
+    const SPEED = 60; // pixeles por segundo — sube para mas rapido
+    let raf = 0;
+    let last = performance.now();
+    let pos = 0;
+
+    const tick = (now: number) => {
+      const dt = (now - last) / 1000;
+      last = now;
+      const track = trackRef.current;
+      if (track) {
+        // ancho de una sola copia = mitad del scrollWidth (hay 2 copias)
+        const copyWidth = track.scrollWidth / 2;
+        pos -= SPEED * dt;
+        if (copyWidth > 0 && pos <= -copyWidth) {
+          pos += copyWidth;
+        }
+        setOffset(pos);
+      }
+      raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
   return (
     <section
       id="clientes"
@@ -66,38 +98,39 @@ export const Clients = () => {
             </h2>
           </div>
           <p className="max-w-xs font-mono text-[11px] uppercase leading-relaxed tracking-[0.16em] text-foreground/65">
-            16 marcas — Desde bebibas hasta real estate — No existe SHIT que no se pueda transformar.
+            16 marcas — Desde bebidas hasta real estate — No existe SHIT que no se pueda transformar.
           </p>
         </Reveal>
       </div>
 
-      {/* Edge-to-edge marquee */}
+      {/* Edge-to-edge marquee — animado con requestAnimationFrame */}
       <div className="relative overflow-hidden border-y border-border">
-  <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent" />
-  <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent" />
-  <div
-  style={{
-    display: "flex",
-    flexWrap: "nowrap",
-    width: "max-content",
-    minWidth: "100%",
-    animation: "scroll-logos 12s linear infinite",
-    willChange: "transform",
-  }}
->
-    {[...Array(6)].map((_, dup) => (
-      <div key={dup} className="flex shrink-0" aria-hidden={dup > 0}>
-        {clients.map((c) => (
-          <LogoItem key={`${dup}-${c.name}`} name={c.name} logo={c.logo} />
-        ))}
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent" />
+        <div
+          ref={trackRef}
+          style={{
+            display: "flex",
+            flexWrap: "nowrap",
+            width: "max-content",
+            transform: `translate3d(${offset}px, 0, 0)`,
+            willChange: "transform",
+          }}
+        >
+          {/* dos copias identicas — suficiente para loop perfecto */}
+          {[0, 1].map((dup) => (
+            <div key={dup} className="flex shrink-0" aria-hidden={dup > 0}>
+              {clients.map((c) => (
+                <LogoItem key={`${dup}-${c.name}`} name={c.name} logo={c.logo} />
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-</div>
 
       <div className="container">
         <p className="mt-7 font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/55">
-          [ Selección · 2024—2026 ]
+          [ Seleccion · 2024—2026 ]
         </p>
       </div>
     </section>
