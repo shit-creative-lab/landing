@@ -1,12 +1,19 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "./motion";
-import startup from "@/assets/case-startup.jpg";
-import drinko from "@/assets/case-drinko.jpg";
-import noz from "@/assets/case-noz.jpg";
-import kzo from "@/assets/case-kzo.jpg";
-
-type GalleryItem = { type: "image"; src: string } | { type: "video"; url: string };
+import drinko from "@/assets/drinko-1.jpg";
+import drinko2 from "@/assets/drinko-2.jpg";
+import ad1Drinko from "@/assets/ad1-drinko.mp4";
+import ad2Drinko from "@/assets/ad2-drinko.mp4";
+import startup from "@/assets/startup-1.jpg";
+import startup2 from "@/assets/startup-2.jpg";
+import noz from "@/assets/noiz-1.jpg";
+import noz2 from "@/assets/noiz-2.jpg";
+import noz3 from "@/assets/noiz-3.jpg";
+type GalleryItem = 
+  | { type: "image"; src: string }
+  | { type: "video"; url: string }
+  | { type: "iframe"; url: string };
 
 type Case = {
   n: string;
@@ -31,41 +38,41 @@ const cases: Case[] = [
     move: "Reconstruccion total: identidad, voz y plataforma editorial pensada como medio, no como portafolio.",
     impact: "Posicionamiento como referente de pensamiento inmobiliario en LATAM.",
     gallery: [
-      { type: "image", src: startup },
+      { type: "image", src: startup2 },
       { type: "video", url: "https://www.youtube.com/embed/fkCs_U2Okaw" },
-      { type: "image", src: noz },
-    ],
-  },
-  {
-    n: "02",
-    name: "DRINKO",
-    img: drinko,
-    tag: "Beverage · Stream Fighters 4",
-    shortImpact: "+4M de espectadores. Cero pesos en pauta.",
-    chaos: "Marca emergente con cero awareness frente a gigantes con presupuesto de pauta.",
-    move: "Hype engineering quirurgico dentro del ecosistema Stream Fighters: storyline, drops y momentos virales.",
-    impact: "+4M de espectadores. Cero pesos en pauta paga.",
-    gallery: [
-      { type: "image", src: drinko },
-      { type: "video", url: "https://www.youtube.com/embed/ID_DRINKO_AQUI" },
-      { type: "image", src: kzo },
-    ],
-  },
-  {
-    n: "03",
-    name: "NO//Z",
-    img: noz,
-    tag: "Nightlife · Brand System",
-    shortImpact: "De club a referente cultural premium.",
-    chaos: "Marca arrastrando estigma nocturno y percepcion de bajo perfil cultural.",
-    move: "Reposicionamiento como ecosistema premium: identidad, ritual de marca y curaduria de experiencias.",
-    impact: "De club a referente cultural premium con waiting list propia.",
-    gallery: [
-      { type: "image", src: noz },
-      { type: "video", url: "https://www.youtube.com/embed/ID_NOZ_AQUI" },
       { type: "image", src: startup },
     ],
   },
+  {
+  n: "02",
+  name: "DRINKO",
+  img: drinko,
+  tag: "Beverage · Stream Fighters 4",
+  shortImpact: "+4M de espectadores. Cero pesos en pauta.",
+  chaos: "Marca emergente con cero awareness frente a gigantes con presupuesto de pauta.",
+  move: "Hype engineering quirurgico dentro del ecosistema Stream Fighters: storyline, drops y momentos virales.",
+  impact: "+4M de espectadores. Cero pesos en pauta paga.",
+  gallery: [
+    { type: "video", url: ad1Drinko },
+    { type: "image", src: drinko2 },
+    { type: "video", url: ad2Drinko },
+  ],
+},
+  {
+  n: "03",
+  name: "NO//Z",
+  img: noz,
+  tag: "Nightlife · Brand System",
+  shortImpact: "De club a referente cultural premium.",
+  chaos: "Marca arrastrando estigma nocturno y percepcion de bajo perfil cultural.",
+  move: "Reposicionamiento como ecosistema premium: identidad, ritual de marca y curaduria de experiencias.",
+  impact: "De club a referente cultural premium con waiting list propia.",
+  gallery: [
+    { type: "image", src: noz },
+    { type: "image", src: noz2 },
+    { type: "image", src: noz3 },
+  ],
+},
   {
     n: "04",
     name: "KZO BEAT",
@@ -76,9 +83,9 @@ const cases: Case[] = [
     move: "Diseno y ejecucion de eventos masivos de networking + narrativa de marca para artistas.",
     impact: "Posicionamiento como nodo central de la escena urbana en Medellin.",
     gallery: [
-      { type: "image", src: kzo },
+      { type: "video", url: kzo1 },
       { type: "video", url: "https://www.youtube.com/embed/lXAGxIcbEIQ" },
-      { type: "image", src: drinko },
+      { type: "video", url: kzo2 },
     ],
   },
 ];
@@ -119,7 +126,7 @@ export const Portfolio = () => {
             </h2>
           </div>
           <p className="max-w-sm text-pretty text-foreground/80">
-            Cuatro casos. Cada uno empezo en caos. Cada uno termino en autoridad cultural.
+            Cuatro marcas. Cuatro visiones. Un solo resultado: Amazing SHIT.
           </p>
         </Reveal>
       </div>
@@ -249,21 +256,30 @@ export const Portfolio = () => {
                     {active.gallery.map((item, i) => (
                       <div key={i} className="aspect-[4/5] overflow-hidden bg-background">
                         {item.type === "video" ? (
-                          <iframe
-                            src={item.url}
-                            className="h-full w-full"
-                            allow="autoplay; fullscreen; picture-in-picture"
-                            allowFullScreen
-                            title={active.name + " — video"}
-                          />
-                        ) : (
-                          <img
-                            src={item.src}
-                            alt={active.name + " — imagen " + (i + 1)}
-                            loading="lazy"
-                            className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                          />
-                        )}
+  <video
+    src={item.url}
+    className="h-full w-full object-cover"
+    autoPlay
+    muted
+    loop
+    playsInline
+  />
+) : item.type === "iframe" ? (
+  <iframe
+    src={item.url}
+    className="h-full w-full"
+    allow="autoplay; fullscreen; picture-in-picture"
+    allowFullScreen
+    title={active.name + " — video"}
+  />
+) : (
+  <img
+    src={item.src}
+    alt={active.name + " — imagen " + (i + 1)}
+    loading="lazy"
+    className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+  />
+)}
                       </div>
                     ))}
                   </div>
