@@ -76,12 +76,15 @@ export const Footer = () => {
         </Reveal>
 
         <div className="mt-14 flex flex-col gap-3 border-t border-border pt-6 font-mono text-[10px] uppercase tracking-[0.24em] text-foreground/55 md:flex-row md:items-center md:justify-between">
-          <span>© {year} SHIT Creative Lab — All rights reserved</span>
-          <span>Studio of High-Impact Tactics</span>
-          <span className="flex items-center gap-2">
-            Est. 2024 <span className="text-brand-flame animate-blink">●</span>
-          </span>
-        </div>
+  <span>© {year} SHIT Creative Lab — All rights reserved</span>
+  <span>Studio of High-Impact Tactics</span>
+  <a href="/politica-de-datos" className="link-underline pb-0.5">
+    Política de Tratamiento de Datos
+  </a>
+  <span className="flex items-center gap-2">
+    Est. 2024 <span className="text-brand-flame animate-blink">●</span>
+  </span>
+</div>
       </div>
     </footer>
   );
