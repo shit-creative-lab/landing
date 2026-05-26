@@ -155,7 +155,6 @@ export const Portfolio = () => {
                   loading="lazy"
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.07]"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-brand-forest via-brand-forest/15 to-transparent" />
                 <div className="absolute left-4 top-4 z-10 flex items-center gap-2">
                   <span className="border border-foreground bg-background/85 px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.2em] backdrop-blur-sm">
                     Case #{c.n}
