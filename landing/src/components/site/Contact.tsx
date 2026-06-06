@@ -57,7 +57,6 @@ export const Contact = () => {
       if (!res.ok) throw new Error(String(res.status));
       setStatus("ok");
       setForm({ firstname: "", email: "", phone: "", company: "", message: "", dinero_presupuestado: "" });
-      window.open("https://wa.me/573242788459", "_blank");
     } catch {
       setStatus("error");
     }
@@ -129,7 +128,9 @@ export const Contact = () => {
                 </label>
                 <input
                   id="c-firstname"
+                  name="firstname"
                   required
+                  autoComplete="given-name"
                   value={form.firstname}
                   onChange={set("firstname")}
                   placeholder="Tu nombre completo"
@@ -142,8 +143,12 @@ export const Contact = () => {
                 </label>
                 <input
                   id="c-email"
+                  name="email"
                   type="email"
                   required
+                  autoComplete="email"
+                  spellCheck={false}
+                  autoCapitalize="off"
                   value={form.email}
                   onChange={set("email")}
                   placeholder="tu@correo.com"
@@ -158,7 +163,9 @@ export const Contact = () => {
               </label>
               <input
                 id="c-phone"
+                name="phone"
                 type="tel"
+                autoComplete="tel"
                 value={form.phone}
                 onChange={set("phone")}
                 placeholder="+57 300 000 0000"
@@ -172,7 +179,9 @@ export const Contact = () => {
               </label>
               <input
                 id="c-company"
+                name="company"
                 required
+                autoComplete="organization"
                 value={form.company}
                 onChange={set("company")}
                 placeholder="Tu marca / empresa"
@@ -186,8 +195,10 @@ export const Contact = () => {
               </label>
               <textarea
                 id="c-message"
+                name="message"
                 required
                 rows={4}
+                autoComplete="off"
                 value={form.message}
                 onChange={set("message")}
                 placeholder="No suavices. El bloqueo real. El que ni le cuentas a tu socio."
@@ -201,8 +212,11 @@ export const Contact = () => {
               </label>
               <input
                 id="c-budget"
-                type="number"
-                min="0"
+                name="dinero_presupuestado"
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                autoComplete="off"
                 value={form.dinero_presupuestado}
                 onChange={set("dinero_presupuestado")}
                 placeholder="Ej. 5000000"
@@ -211,9 +225,19 @@ export const Contact = () => {
             </div>
 
             {status === "ok" && (
-              <p className="mt-6 border border-brand-green bg-brand-green/10 px-4 py-3 font-mono text-xs uppercase tracking-[0.14em] text-brand-green">
-                Mensaje recibido. Te contactamos en menos de 24h.
-              </p>
+              <div className="mt-6 border border-brand-green bg-brand-green/10 px-4 py-3">
+                <p className="font-mono text-xs uppercase tracking-[0.14em] text-brand-green">
+                  Mensaje recibido. Te contactamos en menos de 24h.
+                </p>
+                <a
+                  href="https://wa.me/573242788459"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-brand-green underline underline-offset-2"
+                >
+                  También puedes escribirnos por WhatsApp →
+                </a>
+              </div>
             )}
             {status === "error" && (
               <p className="mt-6 border border-brand-flame bg-brand-flame/10 px-4 py-3 font-mono text-xs uppercase tracking-[0.14em] text-brand-flame">

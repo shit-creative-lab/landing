@@ -24,7 +24,7 @@ export const Hero = () => {
       className="relative min-h-[100svh] overflow-hidden grain-overlay pt-[68px]"
     >
       {/* Parallax editorial image */}
-      <div className="pointer-events-none absolute inset-0">
+      <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <motion.div
           style={{ y: imgY, scale: imgScale }}
           className="absolute right-0 top-0 h-[112%] w-full md:w-[52%]"

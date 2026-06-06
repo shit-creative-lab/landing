@@ -54,6 +54,8 @@ export const Clients = () => {
   // Animacion con requestAnimationFrame: independiente del ancho de pantalla.
   // Recalcula el ancho real de UNA copia y reinicia sin saltos visibles.
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const SPEED = 70; // pixeles por segundo — sube para mas rapido
     let raf = 0;
     let last = performance.now();

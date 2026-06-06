@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "./motion";
 import drinko from "@/assets/drinko-1.jpg";
@@ -95,6 +95,21 @@ const cases: Case[] = [
 
 export const Portfolio = () => {
   const [active, setActive] = useState<Case | null>(null);
+  const triggerRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const activeIndexRef = useRef<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const openCase = (c: Case, index: number) => {
+    activeIndexRef.current = index;
+    setActive(c);
+  };
+
+  const closeCase = () => {
+    setActive(null);
+    const idx = activeIndexRef.current;
+    if (idx !== null) triggerRefs.current[idx]?.focus();
+  };
 
   useEffect(() => {
     document.body.style.overflow = active ? "hidden" : "";
@@ -102,10 +117,29 @@ export const Portfolio = () => {
   }, [active]);
 
   useEffect(() => {
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setActive(null);
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
+    if (active) {
+      closeButtonRef.current?.focus();
+    }
+  }, [active]);
+
+  const handleModalKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Escape") { closeCase(); return; }
+    if (e.key !== "Tab") return;
+    const modal = modalRef.current;
+    if (!modal) return;
+    const focusable = Array.from(
+      modal.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )
+    ).filter((el) => !el.hasAttribute("disabled"));
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last?.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first?.focus(); }
+    }
+  };
 
   return (
     <section
@@ -144,10 +178,11 @@ export const Portfolio = () => {
               className={wide ? "md:col-span-7" : "md:col-span-5"}
             >
               <button
+                ref={(el) => { triggerRefs.current[i] = el; }}
                 type="button"
-                onClick={() => setActive(c)}
+                onClick={() => openCase(c, i)}
                 aria-label={"Abrir caso " + c.name}
-                className="group relative block h-full min-h-[58vh] w-full overflow-hidden bg-background text-left grain-overlay focus:outline-none"
+                className="group relative block h-full min-h-[58vh] w-full overflow-hidden bg-background text-left grain-overlay focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-flame"
               >
                 <img
                   src={c.img}
@@ -187,27 +222,31 @@ export const Portfolio = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setActive(null)}
+            onClick={closeCase}
+            onKeyDown={(e) => e.key === "Escape" && closeCase()}
             className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-foreground/40 backdrop-blur-sm p-3 md:p-8"
             role="dialog"
             aria-modal="true"
             aria-label={"Caso " + active.name}
           >
             <motion.div
+              ref={modalRef}
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               onClick={(e) => e.stopPropagation()}
+              onKeyDown={handleModalKeyDown}
               className="relative my-4 w-full max-w-5xl border border-foreground bg-background shadow-brutal-lg"
             >
               <button
+                ref={closeButtonRef}
                 type="button"
-                onClick={() => setActive(null)}
+                onClick={closeCase}
                 aria-label="Cerrar"
-                className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center border border-foreground bg-background font-mono text-lg transition-colors hover:bg-brand-flame hover:text-brand-pampas"
+                className="absolute right-3 top-3 z-20 flex h-10 w-10 items-center justify-center border border-foreground bg-background font-mono text-lg transition-colors hover:bg-brand-flame hover:text-brand-pampas focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-flame"
               >
-                x
+                ×
               </button>
 
               <div className="relative h-[38vh] overflow-hidden grain-overlay md:h-[48vh]">
@@ -288,7 +327,7 @@ export const Portfolio = () => {
 
                 <a
                   href="#contacto"
-                  onClick={() => setActive(null)}
+                  onClick={closeCase}
                   className="mt-10 flex items-center justify-between border border-foreground bg-foreground px-6 py-4 text-background transition-colors hover:bg-brand-flame hover:border-brand-flame hover:text-brand-pampas"
                 >
                   <span className="font-display text-2xl">Quiero un caso asi</span>
