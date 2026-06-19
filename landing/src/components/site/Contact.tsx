@@ -7,6 +7,16 @@ const HUBSPOT_ENDPOINT = `https://api.hsforms.com/submissions/v3/integration/sub
 
 type Status = "idle" | "sending" | "ok" | "error";
 
+const INITIAL_FORM = {
+  firstname: "",
+  email: "",
+  phone: "",
+  company: "",
+  message: "",
+  dinero_presupuestado: "",
+  terms: false,
+};
+
 const contactRows = [
   { k: "Email", v: "team@shitcreativelab.com", href: "mailto:team@shitcreativelab.com" },
   { k: "WhatsApp", v: "+57 324 278 8459", href: "https://wa.me/573242788459" },
@@ -16,18 +26,15 @@ const contactRows = [
 
 export const Contact = () => {
   const [status, setStatus] = useState<Status>("idle");
-  const [form, setForm] = useState({
-    firstname: "",
-    email: "",
-    phone: "",
-    company: "",
-    message: "",
-    dinero_presupuestado: "",
-  });
+  const [form, setForm] = useState(INITIAL_FORM);
 
   const set = (k: keyof typeof form) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
       setForm((f) => ({ ...f, [k]: e.target.value }));
+
+  const toggle = (k: keyof typeof form) =>
+    (e: React.ChangeEvent<HTMLInputElement>) =>
+      setForm((f) => ({ ...f, [k]: e.target.checked }));
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,9 +48,6 @@ export const Contact = () => {
             { name: "firstname", value: form.firstname },
             { name: "email", value: form.email },
             { name: "phone", value: form.phone },
-            { name: "mobilephone", value: form.phone },
-            { name: "phonenumber", value: form.phone },
-            { name: "telefono", value: form.phone },
             { name: "company", value: form.company },
             { name: "message", value: form.message },
             { name: "dinero_presupuestado", value: form.dinero_presupuestado },
@@ -56,7 +60,7 @@ export const Contact = () => {
       });
       if (!res.ok) throw new Error(String(res.status));
       setStatus("ok");
-      setForm({ firstname: "", email: "", phone: "", company: "", message: "", dinero_presupuestado: "" });
+      setForm(INITIAL_FORM);
     } catch {
       setStatus("error");
     }
@@ -250,6 +254,8 @@ export const Contact = () => {
                 id="c-terms"
                 type="checkbox"
                 required
+                checked={form.terms}
+                onChange={toggle("terms")}
                 className="mt-1 h-4 w-4 shrink-0 cursor-pointer"
                 style={{ accentColor: "hsl(14 71% 54%)" }}
               />

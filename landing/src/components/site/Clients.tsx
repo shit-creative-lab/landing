@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect } from "react";
 import { Reveal } from "./motion";
 import malartista from "@/assets/logos/malartista.svg";
 import arthelier from "@/assets/logos/arthelier.svg";
@@ -49,36 +49,52 @@ const LogoItem = ({ name, logo }: { name: string; logo: string }) => (
 
 export const Clients = () => {
   const trackRef = useRef<HTMLDivElement>(null);
-  const [offset, setOffset] = useState(0);
 
-  // Animacion con requestAnimationFrame: independiente del ancho de pantalla.
-  // Recalcula el ancho real de UNA copia y reinicia sin saltos visibles.
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    const SPEED = 70; // pixeles por segundo — sube para mas rapido
+    const SPEED = 70;
     let raf = 0;
-    let last = performance.now();
+    let last = 0;
     let pos = 0;
+    let copyWidth = 0;
+    let running = false;
 
     const tick = (now: number) => {
+      if (!running) return;
+      if (last === 0) last = now;
       const dt = (now - last) / 1000;
       last = now;
       const track = trackRef.current;
       if (track) {
-        // ancho de una sola copia = mitad del scrollWidth (hay 2 copias)
-        const copyWidth = track.scrollWidth / 2;
         pos -= SPEED * dt;
-        if (copyWidth > 0 && pos <= -copyWidth) {
-          pos += copyWidth;
-        }
-        setOffset(pos);
+        if (copyWidth > 0 && pos <= -copyWidth) pos += copyWidth;
+        track.style.transform = `translate3d(${pos}px, 0, 0)`;
       }
       raf = requestAnimationFrame(tick);
     };
 
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting && !running) {
+        if (copyWidth === 0 && trackRef.current) {
+          copyWidth = trackRef.current.scrollWidth / 2;
+        }
+        running = true;
+        last = 0;
+        raf = requestAnimationFrame(tick);
+      } else if (!entry.isIntersecting && running) {
+        running = false;
+        cancelAnimationFrame(raf);
+      }
+    }, { threshold: 0 });
+
+    const section = trackRef.current?.closest("section");
+    if (section) observer.observe(section);
+
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(raf);
+    };
   }, []);
 
   return (
@@ -115,7 +131,6 @@ export const Clients = () => {
             display: "flex",
             flexWrap: "nowrap",
             width: "max-content",
-            transform: `translate3d(${offset}px, 0, 0)`,
             willChange: "transform",
           }}
         >

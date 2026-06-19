@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "./motion";
+import { useScrollLock } from "@/hooks/use-scroll-lock";
 import drinko from "@/assets/drinko-1.jpg";
 import drinko2 from "@/assets/drinko-2.jpg";
 import ad1Drinko from "@/assets/ad1-drinko.mp4";
@@ -111,10 +112,7 @@ export const Portfolio = () => {
     if (idx !== null) triggerRefs.current[idx]?.focus();
   };
 
-  useEffect(() => {
-    document.body.style.overflow = active ? "hidden" : "";
-    return () => { document.body.style.overflow = ""; };
-  }, [active]);
+  useScrollLock(active !== null);
 
   useEffect(() => {
     if (active) {
@@ -294,7 +292,7 @@ export const Portfolio = () => {
                   </div>
                   <div className="grid grid-cols-3 gap-px border border-border bg-border">
                     {active.gallery.map((item, i) => (
-                      <div key={i} className="aspect-[4/5] overflow-hidden bg-background">
+                      <div key={`${active.n}-${i}`} className="aspect-[4/5] overflow-hidden bg-background">
                         {item.type === "video" ? (
   <video
     src={item.url}

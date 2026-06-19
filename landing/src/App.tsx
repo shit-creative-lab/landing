@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import Index from "./pages/Index";
-import { PoliticaDatos } from "./pages/PoliticaDatos";
+
+const PoliticaDatos = lazy(() => import("./pages/PoliticaDatos"));
 
 const App = () => {
   const [page, setPage] = useState(window.location.pathname);
@@ -11,7 +12,8 @@ const App = () => {
     return () => window.removeEventListener("popstate", handler);
   }, []);
 
-  if (page === "/politica-de-datos") return <PoliticaDatos />;
+  if (page === "/politica-de-datos")
+    return <Suspense fallback={null}><PoliticaDatos /></Suspense>;
   return <Index />;
 };
 

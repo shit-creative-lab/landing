@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export const PoliticaDatos = () => {
+const PoliticaDatos = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -232,3 +232,5 @@ export const PoliticaDatos = () => {
     </main>
   );
 };
+
+export default PoliticaDatos;

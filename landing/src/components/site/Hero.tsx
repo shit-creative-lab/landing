@@ -34,6 +34,7 @@ export const Hero = () => {
             muted
             loop
             playsInline
+            preload="metadata"
             className="h-full w-full object-cover"
           >
             <source src={heroVideo} type="video/mp4" />
