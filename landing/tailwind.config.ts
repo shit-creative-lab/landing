@@ -64,8 +64,8 @@ export default {
         sm: "0px",
       },
       fontFamily: {
-        display: ["Formula Condensed", "Anton", "sans-serif"],
-        editorial: ["PP Editorial New", "Newsreader", "serif"],
+        display: ["Big Shoulders Display", "sans-serif"],
+        editorial: ["Cormorant Garamond", "serif"],
         body: ["Inter", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "monospace"],
       },

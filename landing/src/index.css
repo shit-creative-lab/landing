@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Anton&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@800;900&family=Cormorant+Garamond:ital,wght@1,300&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -12,8 +12,8 @@
            Mushroom Green #456D30 · Flame Pea #DD5C35
            Weathered Taupe #534741 · Egyptian Grey #9B907E
            Pampas #F4F3ED (fondo)
-   TIPOGRAFIA: Inter (cuerpo) · Formula Condensed Bold->Anton (display)
-               PP Editorial New Light Italic->Newsreader (editorial)
+   TIPOGRAFIA: Inter (cuerpo) · Big Shoulders Display 800/900 (display)
+               Cormorant Garamond Light Italic 300 (editorial)
    ============================================================ */
 
 @layer base {
@@ -101,14 +101,14 @@
 @layer utilities {
   /* ---- Tipografía ---- */
   .font-display {
-    font-family: 'Formula Condensed', 'Anton', 'Bebas Neue', sans-serif;
-    font-weight: 700;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
     letter-spacing: -0.015em;
     line-height: 0.92;
     text-transform: uppercase;
   }
   .font-editorial {
-    font-family: 'PP Editorial New', 'Newsreader', Georgia, serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     font-style: italic;
     font-weight: 300;
   }
