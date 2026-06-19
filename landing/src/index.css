@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@800;900&family=Cormorant+Garamond:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@800;900&family=Bodoni+Moda:ital,opsz,wght@1,6..96,300&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -13,7 +13,7 @@
            Weathered Taupe #534741 · Egyptian Grey #9B907E
            Pampas #F4F3ED (fondo)
    TIPOGRAFIA: Inter (cuerpo) · Big Shoulders Display 800/900 (display)
-               Cormorant Garamond Light Italic 300 (editorial)
+               Bodoni Moda Light Italic 300 (editorial)
    ============================================================ */
 
 @layer base {
@@ -108,12 +108,18 @@
     text-transform: uppercase;
   }
   .font-editorial {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: 'Bodoni Moda', Georgia, serif;
     font-style: italic;
     font-weight: 300;
   }
+  .font-editorial::first-letter {
+    text-transform: uppercase;
+  }
   .font-body {
     font-family: 'Inter', system-ui, sans-serif;
+  }
+  .font-mono {
+    font-weight: 300;
   }
   .font-mono-tech {
     font-family: 'Inter', system-ui, sans-serif;

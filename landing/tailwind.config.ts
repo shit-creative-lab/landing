@@ -65,7 +65,7 @@ export default {
       },
       fontFamily: {
         display: ["Big Shoulders Display", "sans-serif"],
-        editorial: ["Cormorant Garamond", "serif"],
+        editorial: ["Bodoni Moda", "serif"],
         body: ["Inter", "system-ui", "sans-serif"],
         mono: ["Inter", "system-ui", "sans-serif"],
       },
