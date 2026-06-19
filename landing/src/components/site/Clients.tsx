@@ -59,26 +59,89 @@ export const Clients = () => {
     let pos = 0;
     let copyWidth = 0;
     let running = false;
+    let paused = false;
+    let dragging = false;
+    let dragStartX = 0;
+    let dragStartPos = 0;
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchStartPos = 0;
+
+    const wrap = (p: number) => {
+      if (copyWidth === 0) return p;
+      p = p % copyWidth;
+      if (p > 0) p -= copyWidth;
+      return p;
+    };
+
+    const applyTransform = () => {
+      if (trackRef.current)
+        trackRef.current.style.transform = `translate3d(${pos}px, 0, 0)`;
+    };
 
     const tick = (now: number) => {
       if (!running) return;
-      if (last === 0) last = now;
-      const dt = (now - last) / 1000;
-      last = now;
-      const track = trackRef.current;
-      if (track) {
-        pos -= SPEED * dt;
-        if (copyWidth > 0 && pos <= -copyWidth) pos += copyWidth;
-        track.style.transform = `translate3d(${pos}px, 0, 0)`;
+      if (!paused && !dragging) {
+        if (last === 0) last = now;
+        const dt = (now - last) / 1000;
+        pos = wrap(pos - SPEED * dt);
       }
+      last = now;
+      applyTransform();
       raf = requestAnimationFrame(tick);
     };
 
+    // — Hover pause —
+    const onMouseEnter = () => { paused = true; };
+    const onMouseLeave = () => { paused = false; last = 0; };
+
+    // — Mouse drag —
+    const onMouseDown = (e: MouseEvent) => {
+      dragging = true;
+      dragStartX = e.clientX;
+      dragStartPos = pos;
+      (e.currentTarget as HTMLElement).style.cursor = "grabbing";
+      (e.currentTarget as HTMLElement).style.userSelect = "none";
+    };
+    const onMouseMove = (e: MouseEvent) => {
+      if (!dragging) return;
+      pos = wrap(dragStartPos + (e.clientX - dragStartX));
+      applyTransform();
+    };
+    const onMouseUp = (e: MouseEvent) => {
+      if (!dragging) return;
+      dragging = false;
+      last = 0;
+      const container = trackRef.current?.parentElement;
+      if (container) {
+        container.style.cursor = "grab";
+        container.style.userSelect = "";
+      }
+    };
+
+    // — Touch swipe —
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchStartPos = pos;
+      paused = true;
+    };
+    const onTouchMove = (e: TouchEvent) => {
+      const dx = e.touches[0].clientX - touchStartX;
+      const dy = e.touches[0].clientY - touchStartY;
+      if (Math.abs(dx) > Math.abs(dy)) {
+        e.preventDefault();
+        pos = wrap(touchStartPos + dx);
+        applyTransform();
+      }
+    };
+    const onTouchEnd = () => { paused = false; last = 0; };
+
+    // — IntersectionObserver —
     const observer = new IntersectionObserver(([entry]) => {
       if (entry.isIntersecting && !running) {
-        if (copyWidth === 0 && trackRef.current) {
+        if (copyWidth === 0 && trackRef.current)
           copyWidth = trackRef.current.scrollWidth / 2;
-        }
         running = true;
         last = 0;
         raf = requestAnimationFrame(tick);
@@ -89,11 +152,35 @@ export const Clients = () => {
     }, { threshold: 0 });
 
     const section = trackRef.current?.closest("section");
+    const container = trackRef.current?.parentElement;
+
     if (section) observer.observe(section);
+    if (container) {
+      container.style.cursor = "grab";
+      container.addEventListener("mouseenter", onMouseEnter);
+      container.addEventListener("mouseleave", onMouseLeave);
+      container.addEventListener("mousedown", onMouseDown);
+      container.addEventListener("touchstart", onTouchStart, { passive: true });
+      container.addEventListener("touchmove", onTouchMove, { passive: false });
+      container.addEventListener("touchend", onTouchEnd);
+    }
+    window.addEventListener("mousemove", onMouseMove);
+    window.addEventListener("mouseup", onMouseUp);
 
     return () => {
       observer.disconnect();
       cancelAnimationFrame(raf);
+      if (container) {
+        container.style.cursor = "";
+        container.removeEventListener("mouseenter", onMouseEnter);
+        container.removeEventListener("mouseleave", onMouseLeave);
+        container.removeEventListener("mousedown", onMouseDown);
+        container.removeEventListener("touchstart", onTouchStart);
+        container.removeEventListener("touchmove", onTouchMove);
+        container.removeEventListener("touchend", onTouchEnd);
+      }
+      window.removeEventListener("mousemove", onMouseMove);
+      window.removeEventListener("mouseup", onMouseUp);
     };
   }, []);
 
