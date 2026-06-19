@@ -67,7 +67,7 @@ export default {
         display: ["Big Shoulders Display", "sans-serif"],
         editorial: ["Cormorant Garamond", "serif"],
         body: ["Inter", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "monospace"],
+        mono: ["Inter", "system-ui", "sans-serif"],
       },
       boxShadow: {
         brutal: "var(--shadow-brutal)",

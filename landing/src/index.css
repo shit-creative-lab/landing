@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@800;900&family=Cormorant+Garamond:ital,wght@1,300&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Big+Shoulders+Display:wght@800;900&family=Cormorant+Garamond:ital,wght@1,300&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -116,7 +116,8 @@
     font-family: 'Inter', system-ui, sans-serif;
   }
   .font-mono-tech {
-    font-family: 'JetBrains Mono', ui-monospace, monospace;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 300;
     letter-spacing: 0.04em;
   }
 
